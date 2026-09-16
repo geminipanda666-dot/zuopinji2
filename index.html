@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>Remix 作品集</title>
+  <meta name="description" content="An immersive, cinematic animation and CGI film portfolio designed with Apple TV+ and Netflix layouts.">
+  <meta property="og:title" content="Remix 作品集">
+  <meta property="og:description" content="An immersive, cinematic animation and CGI film portfolio designed with Apple TV+ and Netflix layouts.">
+  <!-- Link the Tailwind & Custom Style sheet -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-[#050505] text-white overflow-x-hidden select-none">
+
+  <!-- 1. Global Page Loading Fader -->
+  <div id="page-loader" class="fixed inset-0 bg-[#050505] z-50 flex items-center justify-center transition-opacity duration-700 pointer-events-none">
+    <div class="flex flex-col items-center">
+      <div class="w-12 h-12 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+      <p class="text-xs font-mono text-white/40 tracking-[0.2em] mt-4 uppercase">Cinematic Experience Loading</p>
+    </div>
+  </div>
+
+  <!-- 2. Transparent Floating Header -->
+  <header class="fixed top-0 left-0 w-full z-40 glass-nav py-6 px-16 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a href="index.html" class="flex items-center gap-3 group">
+      <div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-black font-bold tracking-tighter text-lg transition-transform group-hover:scale-105">
+        A
+      </div>
+      <div class="flex flex-col">
+        <span class="text-sm font-semibold tracking-[0.15em] uppercase text-white group-hover:text-white/90">Animation</span>
+        <span class="text-[9px] font-mono tracking-[0.3em] uppercase text-white/40">Portfolio</span>
+      </div>
+    </a>
+
+    <!-- Navigation List -->
+    <nav class="flex items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 text-xs md:text-sm font-medium whitespace-nowrap overflow-x-auto scrollbar-none py-1">
+      <a href="#hero-section" class="nav-item active text-white transition-colors hover:text-white">首页</a>
+      <a href="#series-banner" class="nav-item text-white/50 transition-colors hover:text-white">三维动画&AI短片</a>
+      <a href="#series-banner-2" class="nav-item text-white/50 transition-colors hover:text-white">写实类AI短片</a>
+      <a href="#series-banner-3" class="nav-item text-white/50 transition-colors hover:text-white">二维动画AI短片</a>
+      <a href="#storyboard-section" class="nav-item text-white/50 transition-colors hover:text-white">动画分镜</a>
+      <a href="#hand-drawing-section" class="nav-item text-white/50 transition-colors hover:text-white">手绘作品</a>
+      <a href="#about" class="nav-item text-white/50 transition-colors hover:text-white">关于我</a>
+      <a href="#contact" class="nav-item text-white/50 transition-colors hover:text-white">联系方式</a>
+    </nav>
+
+    <!-- Right Utility Profile -->
+    <div class="flex items-center gap-6">
+      <span class="text-[10px] font-mono tracking-widest text-white/40">UTC 2026</span>
+      <div class="w-9 h-9 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/80"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. Apple TV+ Style Hero Section -->
+  <section id="hero-section" class="relative w-full h-[78vh] overflow-hidden bg-black flex items-end">
+    
+    <!-- Hero Background Images (Overlayed for crossfade effect) -->
+    <div id="hero-bg-container" class="absolute inset-0 w-full h-full">
+      <img id="hero-bg-1" src="" class="absolute inset-0 w-full h-full object-cover select-none transition-opacity duration-1000 ease-in-out opacity-100" alt="Hero Background">
+      <img id="hero-bg-2" src="" class="absolute inset-0 w-full h-full object-cover select-none transition-opacity duration-1000 ease-in-out opacity-0" alt="Hero Background Crossfade">
+    </div>
+
+    <!-- Cinematic Vignettes & Shading Overlays -->
+    <div class="hero-vignette"></div>
+    <div class="hero-left-mask"></div>
+    <div class="hero-bottom-mask"></div>
+
+    <!-- Hero Content Panel -->
+    <div class="relative z-10 w-full max-w-[1440px] mx-auto px-16 pb-20 flex flex-col items-start select-text">
+      <!-- Capsule Brand Label -->
+      <div class="mb-5 px-3 py-1 bg-white/10 border border-white/15 rounded-full backdrop-blur-md flex items-center gap-2 animate-fade-in-up">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+        <span class="text-[10px] font-mono font-semibold tracking-[0.2em] uppercase text-white/95">Animation Portfolio</span>
+      </div>
+
+      <!-- Title Logo Container (Loads custom design or text as fallback) -->
+      <div id="hero-title-wrapper" class="mb-3 h-[75px] max-w-[550px] flex items-center transition-all duration-500 transform scale-100 opacity-100">
+        <!-- Title Image -->
+        <img id="hero-title-logo" src="" referrerpolicy="no-referrer" class="h-full object-contain object-left select-none" alt="Project Title Logo">
+        <!-- Fallback text inside JS -->
+      </div>
+
+      <!-- Category & Specs -->
+      <div class="hidden" id="hero-specs-wrapper">
+        <span id="hero-category"></span>
+        <span id="hero-year"></span>
+        <span id="hero-duration"></span>
+      </div>
+
+      <!-- Tagline / Summary Description -->
+      <p id="hero-description" class="max-w-[580px] mb-8 text-sm leading-relaxed text-white/70 font-light tracking-wide cinematic-text-shadow transition-all duration-500">
+        在暴雪中准备放生弱小宠物的少年，因回忆起曾经舍命救己的平凡宠物，最终选择留下它相依为命。
+      </p>
+
+      <!-- Primary View Button & Action Hub -->
+      <div class="flex items-center gap-4">
+        <!-- CTA button -->
+        <a id="hero-cta-btn" href="detail.html?id=project-featured-01" class="group px-8 py-3.5 bg-white text-black font-semibold text-sm rounded-full flex items-center gap-2.5 hover:bg-white/90 active:scale-[0.98] transition-all cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-black transition-transform group-hover:translate-x-0.5"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          查看作品
+        </a>
+        
+        <!-- Next Project Hint or Secondary Button -->
+        <div id="hero-mini-specs" class="hidden">
+          <span id="hero-role"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Rounded Indicator Dots -->
+    <div class="absolute bottom-20 right-16 z-20 flex items-center gap-2.5" id="hero-carousel-dots">
+      <!-- Rendered dynamically by script.js -->
+    </div>
+  </section>
+
+  <!-- 4. Main Grid & Shelf Content Rows -->
+  <main class="relative z-20 bg-[#050505] pt-4 pb-32">
+    <div class="max-w-[1440px] mx-auto px-16 flex flex-col gap-12">
+      
+      <!-- Row 1: Featured Works -->
+      <section id="featured" class="flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-1 h-5 bg-white rounded-full"></span>
+            <h2 class="text-lg font-bold tracking-wider uppercase text-white/90">Featured Works</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="scroll-btn w-8 h-8 rounded-full flex items-center justify-center text-white/50 hover:text-white" onclick="scrollShelf('scroller-featured', 'left')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="scroll-btn w-8 h-8 rounded-full flex items-center justify-center text-white/50 hover:text-white" onclick="scrollShelf('scroller-featured', 'right')">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="scroller-featured" class="horizontal-scroller scrollbar-none">
+          <!-- Dynamic card rendering from script.js -->
+        </div>
+      </section>
+
+      <!-- Series Title Box / Banner Section -->
+      <section id="series-banner" class="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-white/5 group mt-24">
+        <!-- Background Image with beautiful object positioning -->
+        <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/2.png" class="absolute inset-0 w-full h-full object-cover select-none transition-transform duration-1000 group-hover:scale-[1.03]" alt="Series Cover">
+        
+        <!-- Deep Left-to-Right and Bottom-to-Top Vignette Gradient Overlay to ensure readable typography -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+        
+        <!-- Content Panel - Highly compressed vertically for a sleek widescreen cinematic style -->
+        <div class="relative z-10 py-7 md:py-8 px-10 md:px-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <!-- Left side: Branding & Titles -->
+          <div class="flex flex-col items-start gap-1 max-w-[500px] md:max-w-[850px]">
+            <!-- Apple TV+ style Brand -->
+            <div class="flex items-center gap-1.5 text-white/90 font-semibold tracking-wide mb-1 select-none">
+              <span class="text-lg md:text-xl font-bold leading-none">1</span>
+              <span class="text-xs font-mono uppercase tracking-[0.2em] font-medium text-white/80">series</span>
+            </div>
+            <!-- Main Title -->
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white cinematic-text-shadow leading-tight">
+              三维动画&AI短片
+            </h2>
+            <!-- Description -->
+            <p class="text-xs md:text-sm text-white/70 font-light tracking-wide max-w-[580px] mt-1 md:mt-2 leading-relaxed cinematic-text-shadow">
+              通过ai探索三维动画的可实现性与特效、人物、调度的灵活性
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Showcase Section: 16:9 Player & Switcher -->
+      <section id="series-showcase" class="mt-4">
+        <div class="flex flex-col gap-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            <!-- Left Side: 16:9 Widescreen Player and Gallery Container (8 cols on lg, giving switcher more space) -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+              <!-- Player Container -->
+              <div id="widescreen-player-container-1" class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.8)] group">
+                <!-- Video Element (initially playing/hidden) -->
+                <video id="widescreen-video-1" class="hidden absolute inset-0 w-full h-full object-contain bg-black" preload="auto" playsinline referrerpolicy="no-referrer"></video>
+                
+                <!-- Cover Image -->
+                <img id="widescreen-cover-1" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/%E5%B0%81%E9%9D%A2.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" alt="Widescreen Cover">
+                
+                <!-- Dark Overlay Vignette for Widescreen Wibe -->
+                <div id="widescreen-overlay-1" class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/35 pointer-events-none transition-opacity duration-300"></div>
+
+                <!-- Info Overlay (bottom-left) -->
+                <div id="widescreen-info-1" class="absolute bottom-6 left-6 right-6 z-20 flex flex-col pointer-events-none transition-opacity duration-300">
+                  <span id="widescreen-tag-1" class="text-[9px] font-mono uppercase tracking-widest text-[#ff3b30] font-semibold bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded w-max mb-2">NOW PREVIEWING</span>
+                  <h4 id="widescreen-title-1" class="text-xl md:text-2xl font-bold text-white tracking-tight cinematic-text-shadow">洛克王国：世界</h4>
+                </div>
+
+                <!-- Centered Glassy Play Button -->
+                <button id="widescreen-play-btn-1" class="absolute inset-0 m-auto w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.15)] z-20 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]">
+                  <!-- Play Icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="translate-x-0.5 text-white transition-transform duration-300 group-hover:scale-105">
+                    <polygon points="6 3 20 12 6 21 6 3"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Transparent Gallery Box Under Player (Expanded and aligned with switcher bottom) -->
+              <div id="widescreen-gallery-container-1" class="w-full bg-white/[0.015] border border-white/5 rounded-xl p-3 md:p-4 backdrop-blur-md flex flex-col gap-2.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)] opacity-85 hover:opacity-100 transition-opacity duration-300">
+                <div class="flex items-center justify-between">
+                  <span class="text-[9px] font-mono tracking-wider text-white/40 uppercase">分镜精选 / Selected Storyboards</span>
+                  <span class="text-[9px] font-mono text-white/30 font-medium">CAM CH 1-4</span>
+                </div>
+                <div class="grid grid-cols-4 gap-3">
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-1-1" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/1.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-1-2" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/3.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 2">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-1-3" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/4.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 3">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-1-4" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/5.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 4">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Vertical/Horizontal 5-Card Navigator Column (4 cols on lg, making it larger) -->
+            <div id="switcher-col-1" class="lg:col-span-4 flex flex-col gap-3">
+              <div class="flex items-center justify-between select-none">
+                <span class="text-xs font-mono uppercase tracking-wider text-white/50 font-medium">导播切换栏 (5个作品)</span>
+                <span class="text-[10px] font-mono text-white/40 tracking-tight flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#ff3b30]"><path d="M12 3v18M18 9l-6-6-6 6M18 15l-6 6-6-6"/></svg>
+                  滚轮上下滑动切换
+                </span>
+              </div>
+              <div id="switcher-container-1" class="switcher-scroll-track flex flex-col sm:flex-row lg:flex-col gap-3 max-h-[580px] overflow-y-auto overflow-x-auto lg:overflow-x-hidden pr-1.5 pb-2 lg:pb-0 select-none">
+                <!-- Card 1 (Active by default) -->
+                <div class="switcher-card-1 flex-shrink-0 w-full min-w-[240px] sm:min-w-[260px] lg:min-w-0 aspect-video rounded-xl overflow-hidden relative border-2 border-white/95 bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="0"
+                     data-title="洛克王国：世界"
+                     data-desc="在未来的新东京，一名时间漫游者在修复破裂的时空节点时，意外发现了宇宙重叠的真相。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/%E5%B0%81%E9%9D%A2.jpg"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/%E6%B4%9B%E5%85%8B%E7%8E%8B%E5%9B%BD%E4%BD%9C%E5%93%81%E9%9B%86%E4%B8%93%E7%94%A8.mp4"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/1.png"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/3.png"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/4.png"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/5.png">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%B4%9B%E5%85%8B/%E5%B0%81%E9%9D%A2.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="洛克王国">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-[#ff3b30] uppercase tracking-wider font-semibold">PART 01</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">洛克王国：世界</span>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="switcher-card-1 flex-shrink-0 w-full min-w-[240px] sm:min-w-[260px] lg:min-w-0 aspect-video rounded-xl overflow-hidden relative border-2 border-transparent bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="1"
+                     data-title="孤岛惊魂"
+                     data-desc="探索远古荒漠中矗立的黑色神迹，巨大的重力异常与古老文明留下的共鸣音律交织在一起。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E5%AD%A4%E5%B2%9B%E6%83%8A%E9%AD%82/%E5%9B%BE%E7%89%87%E8%8A%82%E7%82%B9%201%20%283%29.png"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E5%AD%A4%E5%B2%9B%E6%83%8A%E9%AD%82/%E5%AD%A4%E5%B2%9B%E6%83%8A%E9%AD%82.mov"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E5%AD%A4%E5%B2%9B%E6%83%8A%E9%AD%82/ComfyUI_00005_uivig_1789116839.jpg"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E5%AD%A4%E5%B2%9B%E6%83%8A%E9%AD%82/ComfyUI_00002_bpqul_1789116792.jpg"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E5%AD%A4%E5%B2%9B%E6%83%8A%E9%AD%82/ComfyUI_00004_ugizm_1789116823.jpg"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E5%AD%A4%E5%B2%9B%E6%83%8A%E9%AD%82/ComfyUI_00003_kzlum_1789116807.jpg">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E5%AD%A4%E5%B2%9B%E6%83%8A%E9%AD%82/%E5%9B%BE%E7%89%87%E8%8A%82%E7%82%B9%201%20%283%29.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="孤岛惊魂">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-white/50 uppercase tracking-wider font-semibold">PART 02</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">孤岛惊魂</span>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="switcher-card-1 flex-shrink-0 w-full min-w-[240px] sm:min-w-[260px] lg:min-w-0 aspect-video rounded-xl overflow-hidden relative border-2 border-transparent bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="2"
+                     data-title="穿越成为国师"
+                     data-desc="高速载具追逐与全息霓虹雨幕下的一场遭遇战。聚焦于极限运动形态学和未来光子流体喷射的粒子运动视觉呈现。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%99%9B%E4%B8%8B/1.jpeg"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%99%9B%E4%B8%8B/%E6%88%90%E4%B8%BA%E5%9B%BD%E5%B8%88%E6%A8%AA%E5%B1%8F.mp4"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%99%9B%E4%B8%8B/6.jpg"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%99%9B%E4%B8%8B/7.jpg"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%99%9B%E4%B8%8B/8.jpg"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%99%9B%E4%B8%8B/9.jpg">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%99%9B%E4%B8%8B/1.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="穿越成为国师">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-white/50 uppercase tracking-wider font-semibold">PART 03</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">穿越成为国师</span>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="switcher-card-1 flex-shrink-0 w-full min-w-[240px] sm:min-w-[260px] lg:min-w-0 aspect-video rounded-xl overflow-hidden relative border-2 border-transparent bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="3"
+                     data-title="未来边际"
+                     data-desc="在焦黑枯萎的末日废土深处，最后一棵发光的生命之树静静矗立。探险机器人与其进行了最后的信息熵交换，唤醒了沉睡的水源循环。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%9C%AA%E6%9D%A5%E8%BE%B9%E9%99%85/%E6%B5%B7%E6%8A%A5%E8%AE%BE%E8%AE%A1.jpeg"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%9C%AA%E6%9D%A5%E8%BE%B9%E9%99%85/%E6%9C%AA%E6%9D%A5%E8%BE%B9%E9%99%85.mp4"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%9C%AA%E6%9D%A5%E8%BE%B9%E9%99%85/1.png"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%9C%AA%E6%9D%A5%E8%BE%B9%E9%99%85/2.png"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%9C%AA%E6%9D%A5%E8%BE%B9%E9%99%85/3.png"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%9C%AA%E6%9D%A5%E8%BE%B9%E9%99%85/4.png">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%9C%AA%E6%9D%A5%E8%BE%B9%E9%99%85/%E6%B5%B7%E6%8A%A5%E8%AE%BE%E8%AE%A1.jpeg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="未来边际">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-white/50 uppercase tracking-wider font-semibold">PART 04</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">未来边际</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Third Screen: Realistic Live Action AI Short Film Series Title Box / Banner Section -->
+      <section id="series-banner-2" class="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-white/5 group mt-24">
+        <!-- Background Image with beautiful object positioning -->
+        <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/%E5%9B%BE%E7%89%87%E8%8A%82%E7%82%B9%201%20%281%29.png" class="absolute inset-0 w-full h-full object-cover select-none transition-transform duration-1000 group-hover:scale-[1.03]" alt="Series Cover 2">
+        
+        <!-- Deep Left-to-Right and Bottom-to-Top Vignette Gradient Overlay to ensure readable typography -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+        
+        <!-- Content Panel - Highly compressed vertically for a sleek widescreen cinematic style -->
+        <div class="relative z-10 py-7 md:py-8 px-10 md:px-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <!-- Left side: Branding & Titles -->
+          <div class="flex flex-col items-start gap-1 max-w-[500px] md:max-w-[850px]">
+            <!-- Apple TV+ style Brand -->
+            <div class="flex items-center gap-1.5 text-white/90 font-semibold tracking-wide mb-1 select-none">
+              <span class="text-lg md:text-xl font-bold leading-none">2</span>
+              <span class="text-xs font-mono uppercase tracking-[0.2em] font-medium text-white/80">series</span>
+            </div>
+            <!-- Main Title -->
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white cinematic-text-shadow leading-tight">
+              写实真人AI短片
+            </h2>
+            <!-- Description -->
+            <p class="text-xs md:text-sm text-white/70 font-light tracking-wide max-w-[580px] mt-1 md:mt-2 leading-relaxed cinematic-text-shadow">
+              通过AI技术，探索写实级数字人类、物理光影与极限镜头调度的无缝融合
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Showcase Section 2: 16:9 Player & Switcher -->
+      <section id="series-showcase-2" class="mt-4">
+        <div class="flex flex-col gap-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            <!-- Left Side: 16:9 Widescreen Player and Gallery Container (8 cols on lg, giving switcher more space) -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+              <!-- Player Container -->
+              <div id="widescreen-player-container-2" class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.8)] group">
+                <!-- Video Element (initially playing/hidden) -->
+                <video id="widescreen-video-2" class="hidden absolute inset-0 w-full h-full object-contain bg-black" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/%E4%B8%8A%E6%B5%B7%E4%B8%B4%E6%B8%AF%E6%88%90%E7%89%87.mp4" preload="auto" playsinline referrerpolicy="no-referrer"></video>
+                
+                <!-- Cover Image -->
+                <img id="widescreen-cover-2" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/%E5%9B%BE%E7%89%87%E8%8A%82%E7%82%B9%201%20%281%29.png" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" alt="Widescreen Cover">
+                
+                <!-- Dark Overlay Vignette for Widescreen Wibe -->
+                <div id="widescreen-overlay-2" class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/35 pointer-events-none transition-opacity duration-300"></div>
+
+                <!-- Info Overlay (bottom-left) -->
+                <div id="widescreen-info-2" class="absolute bottom-6 left-6 right-6 z-20 flex flex-col pointer-events-none transition-opacity duration-300">
+                  <span id="widescreen-tag-2" class="text-[9px] font-mono uppercase tracking-widest text-[#ff3b30] font-semibold bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded w-max mb-2">NOW PREVIEWING</span>
+                  <h4 id="widescreen-title-2" class="text-xl md:text-2xl font-bold text-white tracking-tight cinematic-text-shadow">临港刚刚好</h4>
+                </div>
+
+                <!-- Centered Glassy Play Button -->
+                <button id="widescreen-play-btn-2" class="absolute inset-0 m-auto w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.15)] z-20 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]">
+                  <!-- Play Icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="translate-x-0.5 text-white transition-transform duration-300 group-hover:scale-105">
+                    <polygon points="6 3 20 12 6 21 6 3"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Transparent Gallery Box Under Player (Expanded and aligned with switcher bottom) -->
+              <div id="widescreen-gallery-container-2" class="w-full bg-white/[0.015] border border-white/5 rounded-xl p-3 md:p-4 backdrop-blur-md flex flex-col gap-2.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)] opacity-85 hover:opacity-100 transition-opacity duration-300">
+                <div class="flex items-center justify-between">
+                  <span class="text-[9px] font-mono tracking-wider text-white/40 uppercase">分镜精选 / Selected Storyboards</span>
+                  <span class="text-[9px] font-mono text-white/30 font-medium">CAM CH 1-4</span>
+                </div>
+                <div class="grid grid-cols-4 gap-3">
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-2-1" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/2.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-2-2" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/3.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 2">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-2-3" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/43.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 3">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-2-4" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/%E5%B0%81%E9%9D%A2%E7%B4%A0%E6%9D%90.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 4">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Vertical/Horizontal 4-Card Navigator Column (4 cols on lg, making it larger) -->
+            <div id="switcher-col-2" class="lg:col-span-4 flex flex-col gap-3">
+              <div class="flex items-center justify-between select-none">
+                <span class="text-xs font-mono uppercase tracking-wider text-white/50 font-medium">导播切换栏 (4个作品)</span>
+                <span class="text-[10px] font-mono text-white/40 tracking-tight flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#ff3b30]"><path d="M12 3v18M18 9l-6-6-6 6M18 15l-6 6-6-6"/></svg>
+                  滚轮上下滑动切换
+                </span>
+              </div>
+              <div id="switcher-container-2" class="switcher-scroll-track flex flex-col sm:flex-row lg:flex-col gap-3 max-h-[580px] overflow-y-auto overflow-x-auto lg:overflow-x-hidden pr-1.5 pb-2 lg:pb-0 select-none">
+                <!-- Card 1 (Active by default) -->
+                <div class="switcher-card-2 flex-shrink-0 w-full min-w-[240px] sm:min-w-[260px] lg:min-w-0 aspect-video rounded-xl overflow-hidden relative border-2 border-white/95 bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="0"
+                     data-title="临港刚刚好"
+                     data-desc="探索远古荒漠中矗立的黑色神迹，巨大的重力异常与古老文明留下的共鸣音律交织在一起。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/%E5%9B%BE%E7%89%87%E8%8A%82%E7%82%B9%201%20%281%29.png"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/%E4%B8%8A%E6%B5%B7%E4%B8%B4%E6%B8%AF%E6%88%90%E7%89%87.mp4"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/2.png"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/3.png"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/43.png"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/%E5%B0%81%E9%9D%A2%E7%B4%A0%E6%9D%90.png">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E4%B8%B4%E6%B8%AF/%E5%9B%BE%E7%89%87%E8%8A%82%E7%82%B9%201%20%281%29.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="临港刚刚好">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-[#ff3b30] uppercase tracking-wider font-semibold">PART 01</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">临港刚刚好</span>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="switcher-card-2 flex-shrink-0 w-full min-w-[240px] sm:min-w-[260px] lg:min-w-0 aspect-video rounded-xl overflow-hidden relative border-2 border-transparent bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="1"
+                     data-title="灵思"
+                     data-desc="荒漠落日下的独自前行者。探索人工智能生成的真实地表纹理与高动态光照渲染。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%81%B5%E6%80%9D/1.png"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%81%B5%E6%80%9D/%E7%81%B5%E6%80%9Ddemo.mp4"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%81%B5%E6%80%9D/1.png"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%81%B5%E6%80%9D/2.png"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%81%B5%E6%80%9D/3.png"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%81%B5%E6%80%9D/4.png">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%81%B5%E6%80%9D/1.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="灵思">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-white/50 uppercase tracking-wider font-semibold">PART 02</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">灵思</span>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="switcher-card-2 flex-shrink-0 w-full min-w-[240px] sm:min-w-[260px] lg:min-w-0 aspect-video rounded-xl overflow-hidden relative border-2 border-transparent bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="2"
+                     data-title="穿越成为反派大BOSS"
+                     data-desc="霓虹雨夜下的写实数字人对话。聚焦于面部微表情仿真与高保真皮肤材质模拟。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A9%BF%E8%B6%8A%E6%88%90%E5%8F%8D%E6%B4%BE/3.jpg"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A9%BF%E8%B6%8A%E6%88%90%E5%8F%8D%E6%B4%BE/%E6%AD%A3%E7%89%87%E6%A8%AA%E5%B1%8F.mp4"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A9%BF%E8%B6%8A%E6%88%90%E5%8F%8D%E6%B4%BE/3.jpg"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A9%BF%E8%B6%8A%E6%88%90%E5%8F%8D%E6%B4%BE/4.jpg"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A9%BF%E8%B6%8A%E6%88%90%E5%8F%8D%E6%B4%BE/5.jpg"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A9%BF%E8%B6%8A%E6%88%90%E5%8F%8D%E6%B4%BE/6.jpg">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A9%BF%E8%B6%8A%E6%88%90%E5%8F%8D%E6%B4%BE/3.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="穿越成为反派大BOSS">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-white/50 uppercase tracking-wider font-semibold">PART 03</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">穿越成为反派大BOSS</span>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="switcher-card-2 flex-shrink-0 w-full min-w-[240px] sm:min-w-[260px] lg:min-w-0 aspect-video rounded-xl overflow-hidden relative border-2 border-transparent bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="3"
+                     data-title="魔法学院"
+                     data-desc="探讨数字意识与生物神经突触的融合边界，呈现超高精度的生物荧光脉络与实时神经信号流转视觉效果。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%AD%94%E6%B3%95%E5%AD%A6%E9%99%A2/3.jpg"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%AD%94%E6%B3%95%E5%AD%A6%E9%99%A2/%E9%AD%94%E6%B3%95%E5%AD%A6%E9%99%A240.mp4"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%AD%94%E6%B3%95%E5%AD%A6%E9%99%A2/1.jpg"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%AD%94%E6%B3%95%E5%AD%A6%E9%99%A2/2.jpg"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%AD%94%E6%B3%95%E5%AD%A6%E9%99%A2/4.jpg"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%AD%94%E6%B3%95%E5%AD%A6%E9%99%A2/5.jpg">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E9%AD%94%E6%B3%95%E5%AD%A6%E9%99%A2/3.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="魔法学院">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-white/50 uppercase tracking-wider font-semibold">PART 04</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">魔法学院</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fourth Screen: 2D Animation AI Short Film Series Title Box / Banner Section -->
+      <section id="series-banner-3" class="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-white/5 group mt-24">
+        <!-- Background Image with beautiful object positioning -->
+        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1600&h=900&fit=crop" class="absolute inset-0 w-full h-full object-cover select-none transition-transform duration-1000 group-hover:scale-[1.03]" alt="Series Cover 3">
+        
+        <!-- Deep Left-to-Right and Bottom-to-Top Vignette Gradient Overlay to ensure readable typography -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+        
+        <!-- Content Panel - Highly compressed vertically for a sleek widescreen cinematic style -->
+        <div class="relative z-10 py-7 md:py-8 px-10 md:px-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <!-- Left side: Branding & Titles -->
+          <div class="flex flex-col items-start gap-1 max-w-[500px] md:max-w-[850px]">
+            <!-- Apple TV+ style Brand -->
+            <div class="flex items-center gap-1.5 text-white/90 font-semibold tracking-wide mb-1 select-none">
+              <span class="text-lg md:text-xl font-bold leading-none">3</span>
+              <span class="text-xs font-mono uppercase tracking-[0.2em] font-medium text-white/80">series</span>
+            </div>
+            <!-- Main Title -->
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white cinematic-text-shadow leading-tight">
+              二维动画AI短片
+            </h2>
+            <!-- Description -->
+            <p class="text-xs md:text-sm text-white/70 font-light tracking-wide max-w-[580px] mt-1 md:mt-2 leading-relaxed cinematic-text-shadow">
+              通过AI技术，探索二维手绘与写意风格、角色运动及场景转瞬即逝的艺术张力
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Showcase Section 3: 16:9 Player & Switcher -->
+      <section id="series-showcase-3" class="mt-4">
+        <div class="flex flex-col gap-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            <!-- Left Side: 16:9 Widescreen Player and Gallery Container (8 cols on lg, giving switcher more space) -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+              <!-- Player Container -->
+              <div id="widescreen-player-container-3" class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.8)] group">
+                <!-- Video Element (initially playing/hidden) -->
+                <video id="widescreen-video-3" class="hidden absolute inset-0 w-full h-full object-contain bg-black" preload="auto" playsinline referrerpolicy="no-referrer"></video>
+                
+                <!-- Cover Image -->
+                <img id="widescreen-cover-3" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/5.png" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" alt="Widescreen Cover">
+                
+                <!-- Dark Overlay Vignette for Widescreen Wibe -->
+                <div id="widescreen-overlay-3" class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/35 pointer-events-none transition-opacity duration-300"></div>
+
+                <!-- Info Overlay (bottom-left) -->
+                <div id="widescreen-info-3" class="absolute bottom-6 left-6 right-6 z-20 flex flex-col pointer-events-none transition-opacity duration-300">
+                  <span id="widescreen-tag-3" class="text-[9px] font-mono uppercase tracking-widest text-[#ff3b30] font-semibold bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded w-max mb-2">NOW PREVIEWING</span>
+                  <h4 id="widescreen-title-3" class="text-xl md:text-2xl font-bold text-white tracking-tight cinematic-text-shadow">离婚状</h4>
+                </div>
+
+                <!-- Centered Glassy Play Button -->
+                <button id="widescreen-play-btn-3" class="absolute inset-0 m-auto w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md shadow-[0_0_40px_rgba(255,255,255,0.15)] z-20 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.3)]">
+                  <!-- Play Icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="translate-x-0.5 text-white transition-transform duration-300 group-hover:scale-105">
+                    <polygon points="6 3 20 12 6 21 6 3"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Transparent Gallery Box Under Player (Expanded and aligned with switcher bottom) -->
+              <div id="widescreen-gallery-container-3" class="w-full bg-white/[0.015] border border-white/5 rounded-xl p-3 md:p-4 backdrop-blur-md flex flex-col gap-2.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)] opacity-85 hover:opacity-100 transition-opacity duration-300">
+                <div class="flex items-center justify-between">
+                  <span class="text-[9px] font-mono tracking-wider text-white/40 uppercase">分镜精选 / Selected Storyboards</span>
+                  <span class="text-[9px] font-mono text-white/30 font-medium">CAM CH 1-4</span>
+                </div>
+                <div class="grid grid-cols-4 gap-3">
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-3-1" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/5.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-3-2" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/1.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 2">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-3-3" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/3.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 3">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                  <div class="aspect-[16/9] rounded-lg overflow-hidden border border-white/5 bg-black/40 relative group/thumb shadow-md">
+                    <img id="gallery-img-3-4" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/4.png" class="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" alt="Scene Detail 4">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Vertical/Horizontal 2-Card Navigator Column (4 cols on lg, making it larger) -->
+            <div id="switcher-col-3" class="lg:col-span-4 flex flex-col gap-3">
+              <div class="flex items-center justify-between select-none">
+                <span class="text-xs font-mono uppercase tracking-wider text-white/50 font-medium">导播切换栏 (2个作品)</span>
+                <span class="text-[10px] font-mono text-white/40 tracking-tight flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#ff3b30]"><path d="M12 3v18M18 9l-6-6-6 6M18 15l-6 6-6-6"/></svg>
+                  滚轮上下滑动切换
+                </span>
+              </div>
+              <div id="switcher-container-3" class="switcher-scroll-track flex flex-col sm:flex-row lg:flex-col gap-3.5 select-none">
+                <!-- Card 1 (Active by default) -->
+                <div class="switcher-card-3 flex-1 aspect-video rounded-xl overflow-hidden relative border-2 border-white/95 bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="0"
+                     data-title="离婚状"
+                     data-desc="女主在宴会上惊觉离婚八年的前夫竟成了帝国皇帝，本想惊恐逃离，却被这位深情的帝王默默补偿并舍命相救，最终又走到了一起。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/5.png"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/%E7%A6%BB%E5%A9%9A%E7%8A%B6%20.mp4"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/5.png"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/1.png"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/3.png"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/4.png">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%A6%BB%E5%A9%9A%E7%8A%B6/5.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="离婚状">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-[#ff3b30] uppercase tracking-wider font-semibold">PART 01</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">离婚状</span>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="switcher-card-3 flex-1 aspect-video rounded-xl overflow-hidden relative border-2 border-transparent bg-zinc-900 cursor-pointer group transition-all duration-300 shadow-md" 
+                     data-index="1"
+                     data-title="我的王爷"
+                     data-desc="复古手绘风格下的都市一角，雨滴拍打全息站牌。主攻传统二维赛璐珞质感与流体泼溅的AI重绘实验。"
+                     data-cover="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%88%91%E7%9A%84%E7%8E%8B%E7%88%B7/ComfyUI_00004_afpom_1789289734.jpg"
+                     data-video="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%88%91%E7%9A%84%E7%8E%8B%E7%88%B7/%E6%88%91%E7%9A%84%E7%8E%8B%E7%88%B701.mp4"
+                     data-gallery-1="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%88%91%E7%9A%84%E7%8E%8B%E7%88%B7/ComfyUI_00004_afpom_1789289734.jpg"
+                     data-gallery-2="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%88%91%E7%9A%84%E7%8E%8B%E7%88%B7/ComfyUI_00001_xfudr_1789289696.jpg"
+                     data-gallery-3="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%88%91%E7%9A%84%E7%8E%8B%E7%88%B7/ComfyUI_00003_vxpmn_1789289722.jpg"
+                     data-gallery-4="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%88%91%E7%9A%84%E7%8E%8B%E7%88%B7/ComfyUI_00002_atoob_1789289710.jpg">
+                  <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E6%88%91%E7%9A%84%E7%8E%8B%E7%88%B7/ComfyUI_00004_afpom_1789289734.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="我的王爷">
+                  <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors"></div>
+                  <!-- Content info -->
+                  <div class="absolute bottom-3 left-4 right-4 flex flex-col">
+                    <span class="text-[10px] font-mono text-white/50 uppercase tracking-wider font-semibold">PART 02</span>
+                    <span class="text-xs font-bold text-white truncate mt-0.5">我的王爷</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Storyboard Section (动画分镜设计) -->
+      <section id="storyboard-section" class="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-white/5 group mt-24">
+        <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E5%88%86%E9%95%9C/%E7%8B%BC%E4%BA%BA/1.jpg" class="absolute inset-0 w-full h-full object-cover select-none transition-transform duration-1000 group-hover:scale-[1.03] opacity-35" alt="Storyboard Header Cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+        <div class="relative z-10 py-7 md:py-8 px-10 md:px-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="flex flex-col items-start gap-1 max-w-[500px] md:max-w-[850px]">
+            <div class="flex items-center gap-1.5 text-white/90 font-semibold tracking-wide mb-1 select-none">
+              <span class="text-lg md:text-xl font-bold leading-none">2</span>
+              <span class="text-xs font-mono uppercase tracking-[0.2em] font-medium text-white/80">SERIES</span>
+            </div>
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white cinematic-text-shadow leading-tight">
+              动画分镜设计
+            </h2>
+            <p class="text-xs md:text-sm text-white/70 font-light tracking-wide max-w-[580px] mt-1 md:mt-2 leading-relaxed cinematic-text-shadow">
+              通过连续镜头展现叙事节奏、构图关系与镜头语言
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="storyboard-content-wrapper" class="mt-4">
+        <div id="storyboard-content" class="grid grid-cols-1 lg:grid-cols-10 gap-8 mt-4">
+          <!-- Left side: Selected Main Storyboard (about 70% width) -->
+          <div class="lg:col-span-7 flex flex-col gap-6">
+            <div class="aspect-[16/9] w-full rounded-2xl overflow-hidden bg-zinc-950 border border-white/5 relative group cursor-zoom-in" id="storyboard-main-container">
+              <img id="storyboard-main-img" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E5%88%86%E9%95%9C/%E7%8B%BC%E4%BA%BA/1.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01]" alt="Main Storyboard Preview">
+              <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors pointer-events-none"></div>
+            </div>
+            
+            <!-- Bottom: Storyboard Filmstrip -->
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center justify-between px-1">
+                <span class="text-[9px] font-mono tracking-wider text-white/40 uppercase">连续分镜条 / FILMSTRIP SEQUENCES</span>
+                <span class="text-[10px] font-mono text-white/30" id="storyboard-count">01 / 04</span>
+              </div>
+              <div id="storyboard-filmstrip" class="grid grid-cols-4 gap-3">
+                <!-- Injected via script.js -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right side: Project Directory (about 30% width) -->
+          <div class="lg:col-span-3 flex flex-col gap-5 bg-white/[0.015] border border-white/5 rounded-2xl p-6 h-full justify-between shadow-[inset_0_1px_1px_rgba(255,255,255,0.02)]">
+            <div class="flex flex-col gap-4">
+              <span class="text-[10px] font-mono uppercase tracking-wider text-white/40 font-semibold select-none">分镜项目目录</span>
+              <div id="storyboard-project-list" class="flex flex-col gap-2.5">
+                <!-- Injected via script.js -->
+              </div>
+            </div>
+            <div class="text-[10px] font-mono text-white/20 border-t border-white/5 pt-4 mt-6 leading-relaxed">
+              SELECT ANY STORYBOARD PROJECT FROM THE DIRECTORY LIST TO REVIEW ITS FULL CONTINUOUS CINEMATIC STORYBOARD FRAMES. CLICK COMPOSITION TO OPEN LIGHTBOX VIEWER.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 7: Hand Drawing Section (手绘作品练习) -->
+      <section id="hand-drawing-section" class="relative w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-white/5 group mt-24">
+        <img src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%BB%98%E7%94%BB/1.jpg" class="absolute inset-0 w-full h-full object-cover select-none transition-transform duration-1000 group-hover:scale-[1.03] opacity-35" alt="Hand Drawing Header Cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+        <div class="relative z-10 py-7 md:py-8 px-10 md:px-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="flex flex-col items-start gap-1 max-w-[500px] md:max-w-[850px]">
+            <div class="flex items-center gap-1.5 text-white/90 font-semibold tracking-wide mb-1 select-none">
+              <span class="text-lg md:text-xl font-bold leading-none">4</span>
+              <span class="text-xs font-mono uppercase tracking-[0.2em] font-medium text-white/80">SERIES</span>
+            </div>
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white cinematic-text-shadow leading-tight">
+              手绘作品练习
+            </h2>
+            <p class="text-xs md:text-sm text-white/70 font-light tracking-wide max-w-[580px] mt-1 md:mt-2 leading-relaxed cinematic-text-shadow">
+              记录不同阶段的观察、造型与画面表达
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="hand-drawing-content-wrapper" class="mt-4">
+        <div id="hand-drawing-content" class="flex flex-col gap-10">
+          <!-- First Tier: Featured Drawings (1 large on left, 2 stacked on right) -->
+          <div class="flex flex-col gap-3">
+            <span class="text-[9px] font-mono tracking-wider text-white/40 uppercase">精选手绘作品 / FEATURED SELECTIONS</span>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <!-- Large Featured Image -->
+              <div class="lg:col-span-8">
+                <div class="aspect-[16/10] w-full rounded-2xl overflow-hidden bg-zinc-950 border border-white/5 relative group cursor-zoom-in hand-drawing-item" data-index="0">
+                  <img id="hd-featured-img-large" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%BB%98%E7%94%BB/1.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-101" alt="Featured Drawing Large">
+                  <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300"></div>
+                </div>
+              </div>
+              <!-- Stacked Secondary Images -->
+              <div class="lg:col-span-4 flex flex-col gap-6">
+                <div class="flex-1 aspect-[16/9] lg:aspect-auto w-full rounded-2xl overflow-hidden bg-zinc-950 border border-white/5 relative group cursor-zoom-in hand-drawing-item" data-index="1">
+                  <img id="hd-featured-img-small-1" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%BB%98%E7%94%BB/4.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-101" alt="Featured Drawing Small 1">
+                  <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300"></div>
+                </div>
+                <div class="flex-1 aspect-[16/9] lg:aspect-auto w-full rounded-2xl overflow-hidden bg-zinc-950 border border-white/5 relative group cursor-zoom-in hand-drawing-item" data-index="2">
+                  <img id="hd-featured-img-small-2" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/%E7%BB%98%E7%94%BB/2.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-101" alt="Featured Drawing Small 2">
+                  <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Second Tier: Detailed Exercises -->
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center justify-between px-1">
+              <span class="text-[9px] font-mono tracking-wider text-white/40 uppercase">全部练习作品 / DETAILED EXERCISES</span>
+              <div class="flex items-center gap-2">
+                <button id="hd-scroll-left" class="scroll-btn w-7 h-7 rounded-full flex items-center justify-center text-white/50 hover:text-white" onclick="scrollShelf('hand-drawing-scroller', 'left')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button id="hd-scroll-right" class="scroll-btn w-7 h-7 rounded-full flex items-center justify-center text-white/50 hover:text-white" onclick="scrollShelf('hand-drawing-scroller', 'right')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+            </div>
+            <div id="hand-drawing-scroller" class="flex gap-6 overflow-x-auto scrollbar-none scroll-smooth pb-1">
+              <!-- Injected via script.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Elegant Clean "About Me" Section -->
+      <section id="about" class="mt-24 pt-16 border-t border-white/5 flex flex-col">
+        <!-- FIRST LAYER: Profile Visual Center (左右两栏) -->
+        <div class="flex flex-col md:flex-row gap-10 md:gap-16 lg:gap-20 md:items-end w-full">
+          <!-- Left Column: Portrait Photo -->
+          <div class="flex-shrink-0 flex justify-start profile-fade-in" id="profile-photo-container">
+            <div class="w-[180px] sm:w-[200px] md:w-[210px] lg:w-[230px] aspect-[3/4] rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl shadow-black/80 group/profile-img relative transition-all duration-300 hover:border-white/20 hover:scale-[1.01]">
+              <img id="profile-photo" src="https://4004306011.cdn.123clouddisk.com/4004306011/%E7%9B%B4%E9%93%BE/f528063b6c5dcd0181f46cfd806d632b.jpg" class="w-full h-full object-cover saturate-[0.85] transition-transform duration-500 group-hover/profile-img:scale-102 select-none" alt="Profile Portrait" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+              <!-- Fallback placeholder when photo fails to load -->
+              <div class="absolute inset-0 bg-zinc-900 hidden flex flex-col items-center justify-center text-white/30 text-xs font-mono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mb-2 opacity-50"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span>PHOTO ERROR</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right Column: Personal Job and Bio -->
+          <div class="w-full md:w-auto flex-grow flex flex-col items-start pt-2 profile-fade-in" id="profile-text-container" style="transition-delay: 100ms;">
+            <span class="text-[10px] font-mono tracking-[0.25em] uppercase text-white/40 mb-3" id="profile-eyebrow">PROFESSIONAL PROFILE</span>
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-white mb-6 leading-snug" id="profile-role">影视动画分镜设计师/导演</h2>
+            <div class="flex flex-col gap-5 text-sm leading-relaxed text-white/60 max-w-[640px]" id="profile-paragraphs">
+              <p class="text-sm leading-relaxed text-white/60">毕业于西安工业大学，深耕动画与分镜领域。作为独立动画导演，擅长驾驭多种风格的视觉影像，熟练掌握电影叙事的视听语言，能够将独特的创意构想转化为具有电影感与高完成度的动态影像。</p>
+              <p class="text-sm leading-relaxed text-white/60">多次参与政府及业内顶尖大厂的核心项目，熟悉动画工业全流程，具备出色的独立创作能力、高标准的项目调度经验以及从前期筹备到后期成片的全链路制作把控能力。</p>
+            </div>
+            <!-- Short decorative thin divider line -->
+            <div class="w-12 h-[1px] bg-white/15 mt-8"></div>
+          </div>
+        </div>
+
+        <!-- SECOND LAYER: Core Skills & Awards Section (左右两栏) -->
+        <div id="profile-skills-awards" class="mt-16 py-12 border-t border-b border-white/5 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 relative">
+          <!-- Left: Core Skills -->
+          <div class="flex flex-col">
+            <h3 class="text-xs font-mono tracking-[0.2em] text-white/40 uppercase mb-6 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 bg-white/40 rounded-full"></span>
+              掌握软件 / CORE SKILLS
+            </h3>
+            <div id="skills-container" class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm text-white/80">
+              <!-- Injected dynamically from data.js -->
+            </div>
+          </div>
+          
+          <!-- Vertical fine line separator on md & lg screens -->
+          <div class="hidden md:block absolute top-12 bottom-12 left-1/2 w-[1px] bg-white/5 -translate-x-1/2"></div>
+          
+          <!-- Right: Awards -->
+          <div class="flex flex-col md:pl-8">
+            <h3 class="text-xs font-mono tracking-[0.2em] text-white/40 uppercase mb-6 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 bg-white/40 rounded-full"></span>
+              获得奖项 / AWARDS
+            </h3>
+                        <div id="awards-container" class="flex flex-col gap-0 text-sm">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between py-3.5 transition-all duration-300 hover:bg-white/[0.015] px-2 rounded-lg group">
+                <div class="flex items-center gap-3">
+                  <span class="inline-flex items-center justify-center w-8 h-8 flex-shrink-0 text-zinc-400 group-hover:text-zinc-200 transition-colors" title="获奖荣誉">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M16.956 2.057c.355 .124 .829 .375 1.303 .796a3.77 3.77 0 0 1 1.246 2.204c.173 .989 -.047 1.894 -.519 2.683l-.123 .194q -.097 .147 -.196 .272q .066 .234 .117 .471q .26 -.178 .545 -.307c.851 -.389 1.727 -.442 2.527 -.306q .226 .04 .346 .076a1 1 0 0 1 .689 .712l.029 .13q .015 .08 .03 .18a4.45 4.45 0 0 1 -.324 2.496a3.94 3.94 0 0 1 -1.71 1.85l-.242 .12a4.23 4.23 0 0 1 -2.234 .349a9 9 0 0 1 -.443 1.023c.37 .016 .748 .093 1.128 .24c.732 .28 1.299 .758 1.711 1.367a3.95 3.95 0 0 1 .654 1.613a1 1 0 0 1 -.356 .917a3.8 3.8 0 0 1 -.716 .443c-.933 .455 -1.978 .588 -3.043 .179l-.032 -.015l-.205 -.086a3.6 3.6 0 0 1 -1.33 -1.069l-.143 -.197a4 4 0 0 1 -.26 -.433a6 6 0 0 1 -.927 .511q .18 .262 .337 .56a7.4 7.4 0 0 1 .66 1.747a1 1 0 0 1 -1.95 .444l-.028 -.11a6 6 0 0 0 -.449 -1.143c-.342 -.645 -.71 -.968 -1.048 -.968s-.706 .323 -1.048 .969a5.6 5.6 0 0 0 -.367 .874l-.082 .269l-.028 .11a1 1 0 0 1 -1.95 -.444a7.3 7.3 0 0 1 .66 -1.747q .158 -.298 .337 -.561a6.4 6.4 0 0 1 -.93 -.508a4 4 0 0 1 -.256 .43c-.366 .541 -.855 .98 -1.473 1.267l-.238 .1c-.994 .382 -1.97 .292 -2.855 -.091l-.188 -.087a3.8 3.8 0 0 1 -.716 -.443a1 1 0 0 1 -.356 -.917a3.95 3.95 0 0 1 .654 -1.613a3.6 3.6 0 0 1 1.71 -1.368c.38 -.146 .758 -.223 1.13 -.24a9 9 0 0 1 -.445 -1.023a4.23 4.23 0 0 1 -2.233 -.348a4 4 0 0 1 -.916 -.587l-.207 -.191a4 4 0 0 1 -.724 -.977l-.105 -.216a4.45 4.45 0 0 1 -.265 -2.806a1 1 0 0 1 .69 -.712q .119 -.036 .345 -.076c.801 -.135 1.678 -.082 2.53 .308q .283 .129 .545 .304q .048 -.235 .112 -.47a5 5 0 0 1 -.194 -.272c-.556 -.832 -.83 -1.806 -.642 -2.877l.05 -.242a3.75 3.75 0 0 1 1.027 -1.803l.169 -.159a4 4 0 0 1 1.303 -.796a1 1 0 0 1 .975 .178c.2 .168 .462 .446 .719 .83c.556 .833 .83 1.807 .642 2.878a3.77 3.77 0 0 1 -1.246 2.204c-.303 .27 -.607 .47 -.879 .61a7.5 7.5 0 0 0 -.255 1.971c0 3.502 2.285 6.272 5 6.272s5 -2.77 5 -6.276a7.6 7.6 0 0 0 -.253 -1.967a4.3 4.3 0 0 1 -.881 -.61a3.77 3.77 0 0 1 -1.246 -2.204c-.188 -1.07 .086 -2.045 .642 -2.877c.257 -.385 .52 -.663 .72 -.831a1 1 0 0 1 .974 -.178" />
+                    </svg>
+                  </span>
+                  <span class="text-sm text-white/85 group-hover:text-white transition-colors font-medium">第十五届中国好创意数字设计大赛</span>
+                </div>
+                <span class="text-xs text-white/40 mt-1 sm:mt-0 font-light tracking-wide group-hover:text-white/60 transition-colors">国赛二等奖 / 漫画插画组</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between py-3.5 border-t border-white/5 transition-all duration-300 hover:bg-white/[0.015] px-2 rounded-lg group">
+                <div class="flex items-center gap-3">
+                  <span class="inline-flex items-center justify-center w-8 h-8 flex-shrink-0 text-zinc-400 group-hover:text-zinc-200 transition-colors" title="获奖荣誉">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M16.956 2.057c.355 .124 .829 .375 1.303 .796a3.77 3.77 0 0 1 1.246 2.204c.173 .989 -.047 1.894 -.519 2.683l-.123 .194q -.097 .147 -.196 .272q .066 .234 .117 .471q .26 -.178 .545 -.307c.851 -.389 1.727 -.442 2.527 -.306q .226 .04 .346 .076a1 1 0 0 1 .689 .712l.029 .13q .015 .08 .03 .18a4.45 4.45 0 0 1 -.324 2.496a3.94 3.94 0 0 1 -1.71 1.85l-.242 .12a4.23 4.23 0 0 1 -2.234 .349a9 9 0 0 1 -.443 1.023c.37 .016 .748 .093 1.128 .24c.732 .28 1.299 .758 1.711 1.367a3.95 3.95 0 0 1 .654 1.613a1 1 0 0 1 -.356 .917a3.8 3.8 0 0 1 -.716 .443c-.933 .455 -1.978 .588 -3.043 .179l-.032 -.015l-.205 -.086a3.6 3.6 0 0 1 -1.33 -1.069l-.143 -.197a4 4 0 0 1 -.26 -.433a6 6 0 0 1 -.927 .511q .18 .262 .337 .56a7.4 7.4 0 0 1 .66 1.747a1 1 0 0 1 -1.95 .444l-.028 -.11a6 6 0 0 0 -.449 -1.143c-.342 -.645 -.71 -.968 -1.048 -.968s-.706 .323 -1.048 .969a5.6 5.6 0 0 0 -.367 .874l-.082 .269l-.028 .11a1 1 0 0 1 -1.95 -.444a7.3 7.3 0 0 1 .66 -1.747q .158 -.298 .337 -.561a6.4 6.4 0 0 1 -.93 -.508a4 4 0 0 1 -.256 .43c-.366 .541 -.855 .98 -1.473 1.267l-.238 .1c-.994 .382 -1.97 .292 -2.855 -.091l-.188 -.087a3.8 3.8 0 0 1 -.716 -.443a1 1 0 0 1 -.356 -.917a3.95 3.95 0 0 1 .654 -1.613a3.6 3.6 0 0 1 1.71 -1.368c.38 -.146 .758 -.223 1.13 -.24a9 9 0 0 1 -.445 -1.023a4.23 4.23 0 0 1 -2.233 -.348a4 4 0 0 1 -.916 -.587l-.207 -.191a4 4 0 0 1 -.724 -.977l-.105 -.216a4.45 4.45 0 0 1 -.265 -2.806a1 1 0 0 1 .69 -.712q .119 -.036 .345 -.076c.801 -.135 1.678 -.082 2.53 .308q .283 .129 .545 .304q .048 -.235 .112 -.47a5 5 0 0 1 -.194 -.272c-.556 -.832 -.83 -1.806 -.642 -2.877l.05 -.242a3.75 3.75 0 0 1 1.027 -1.803l.169 -.159a4 4 0 0 1 1.303 -.796a1 1 0 0 1 .975 .178c.2 .168 .462 .446 .719 .83c.556 .833 .83 1.807 .642 2.878a3.77 3.77 0 0 1 -1.246 2.204c-.303 .27 -.607 .47 -.879 .61a7.5 7.5 0 0 0 -.255 1.971c0 3.502 2.285 6.272 5 6.272s5 -2.77 5 -6.276a7.6 7.6 0 0 0 -.253 -1.967a4.3 4.3 0 0 1 -.881 -.61a3.77 3.77 0 0 1 -1.246 -2.204c-.188 -1.07 .086 -2.045 .642 -2.877c.257 -.385 .52 -.663 .72 -.831a1 1 0 0 1 .974 -.178" />
+                    </svg>
+                  </span>
+                  <span class="text-sm text-white/85 group-hover:text-white transition-colors font-medium">第十六届中国好创意数字设计大赛</span>
+                </div>
+                <span class="text-xs text-white/40 mt-1 sm:mt-0 font-light tracking-wide group-hover:text-white/60 transition-colors">国赛二等奖 / 动画影片组</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between py-3.5 border-t border-white/5 transition-all duration-300 hover:bg-white/[0.015] px-2 rounded-lg group">
+                <div class="flex items-center gap-3">
+                  <span class="inline-flex items-center justify-center w-8 h-8 flex-shrink-0 text-zinc-400 group-hover:text-zinc-200 transition-colors" title="获奖荣誉">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M16.956 2.057c.355 .124 .829 .375 1.303 .796a3.77 3.77 0 0 1 1.246 2.204c.173 .989 -.047 1.894 -.519 2.683l-.123 .194q -.097 .147 -.196 .272q .066 .234 .117 .471q .26 -.178 .545 -.307c.851 -.389 1.727 -.442 2.527 -.306q .226 .04 .346 .076a1 1 0 0 1 .689 .712l.029 .13q .015 .08 .03 .18a4.45 4.45 0 0 1 -.324 2.496a3.94 3.94 0 0 1 -1.71 1.85l-.242 .12a4.23 4.23 0 0 1 -2.234 .349a9 9 0 0 1 -.443 1.023c.37 .016 .748 .093 1.128 .24c.732 .28 1.299 .758 1.711 1.367a3.95 3.95 0 0 1 .654 1.613a1 1 0 0 1 -.356 .917a3.8 3.8 0 0 1 -.716 .443c-.933 .455 -1.978 .588 -3.043 .179l-.032 -.015l-.205 -.086a3.6 3.6 0 0 1 -1.33 -1.069l-.143 -.197a4 4 0 0 1 -.26 -.433a6 6 0 0 1 -.927 .511q .18 .262 .337 .56a7.4 7.4 0 0 1 .66 1.747a1 1 0 0 1 -1.95 .444l-.028 -.11a6 6 0 0 0 -.449 -1.143c-.342 -.645 -.71 -.968 -1.048 -.968s-.706 .323 -1.048 .969a5.6 5.6 0 0 0 -.367 .874l-.082 .269l-.028 .11a1 1 0 0 1 -1.95 -.444a7.3 7.3 0 0 1 .66 -1.747q .158 -.298 .337 -.561a6.4 6.4 0 0 1 -.93 -.508a4 4 0 0 1 -.256 .43c-.366 .541 -.855 .98 -1.473 1.267l-.238 .1c-.994 .382 -1.97 .292 -2.855 -.091l-.188 -.087a3.8 3.8 0 0 1 -.716 -.443a1 1 0 0 1 -.356 -.917a3.95 3.95 0 0 1 .654 -1.613a3.6 3.6 0 0 1 1.71 -1.368c.38 -.146 .758 -.223 1.13 -.24a9 9 0 0 1 -.445 -1.023a4.23 4.23 0 0 1 -2.233 -.348a4 4 0 0 1 -.916 -.587l-.207 -.191a4 4 0 0 1 -.724 -.977l-.105 -.216a4.45 4.45 0 0 1 -.265 -2.806a1 1 0 0 1 .69 -.712q .119 -.036 .345 -.076c.801 -.135 1.678 -.082 2.53 .308q .283 .129 .545 .304q .048 -.235 .112 -.47a5 5 0 0 1 -.194 -.272c-.556 -.832 -.83 -1.806 -.642 -2.877l.05 -.242a3.75 3.75 0 0 1 1.027 -1.803l.169 -.159a4 4 0 0 1 1.303 -.796a1 1 0 0 1 .975 .178c.2 .168 .462 .446 .719 .83c.556 .833 .83 1.807 .642 2.878a3.77 3.77 0 0 1 -1.246 2.204c-.303 .27 -.607 .47 -.879 .61a7.5 7.5 0 0 0 -.255 1.971c0 3.502 2.285 6.272 5 6.272s5 -2.77 5 -6.276a7.6 7.6 0 0 0 -.253 -1.967a4.3 4.3 0 0 1 -.881 -.61a3.77 3.77 0 0 1 -1.246 -2.204c-.188 -1.07 .086 -2.045 .642 -2.877c.257 -.385 .52 -.663 .72 -.831a1 1 0 0 1 .974 -.178" />
+                    </svg>
+                  </span>
+                  <span class="text-sm text-white/85 group-hover:text-white transition-colors font-medium">第十六届中国好创意数字设计大赛</span>
+                </div>
+                <span class="text-xs text-white/40 mt-1 sm:mt-0 font-light tracking-wide group-hover:text-white/60 transition-colors">国赛二等奖 / 数字特效组</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between py-3.5 border-t border-white/5 transition-all duration-300 hover:bg-white/[0.015] px-2 rounded-lg group">
+                <div class="flex items-center gap-3">
+                  <span class="inline-flex items-center justify-center w-8 h-8 flex-shrink-0 text-zinc-400 group-hover:text-zinc-200 transition-colors" title="获奖荣誉">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M16.956 2.057c.355 .124 .829 .375 1.303 .796a3.77 3.77 0 0 1 1.246 2.204c.173 .989 -.047 1.894 -.519 2.683l-.123 .194q -.097 .147 -.196 .272q .066 .234 .117 .471q .26 -.178 .545 -.307c.851 -.389 1.727 -.442 2.527 -.306q .226 .04 .346 .076a1 1 0 0 1 .689 .712l.029 .13q .015 .08 .03 .18a4.45 4.45 0 0 1 -.324 2.496a3.94 3.94 0 0 1 -1.71 1.85l-.242 .12a4.23 4.23 0 0 1 -2.234 .349a9 9 0 0 1 -.443 1.023c.37 .016 .748 .093 1.128 .24c.732 .28 1.299 .758 1.711 1.367a3.95 3.95 0 0 1 .654 1.613a1 1 0 0 1 -.356 .917a3.8 3.8 0 0 1 -.716 .443c-.933 .455 -1.978 .588 -3.043 .179l-.032 -.015l-.205 -.086a3.6 3.6 0 0 1 -1.33 -1.069l-.143 -.197a4 4 0 0 1 -.26 -.433a6 6 0 0 1 -.927 .511q .18 .262 .337 .56a7.4 7.4 0 0 1 .66 1.747a1 1 0 0 1 -1.95 .444l-.028 -.11a6 6 0 0 0 -.449 -1.143c-.342 -.645 -.71 -.968 -1.048 -.968s-.706 .323 -1.048 .969a5.6 5.6 0 0 0 -.367 .874l-.082 .269l-.028 .11a1 1 0 0 1 -1.95 -.444a7.3 7.3 0 0 1 .66 -1.747q .158 -.298 .337 -.561a6.4 6.4 0 0 1 -.93 -.508a4 4 0 0 1 -.256 .43c-.366 .541 -.855 .98 -1.473 1.267l-.238 .1c-.994 .382 -1.97 .292 -2.855 -.091l-.188 -.087a3.8 3.8 0 0 1 -.716 -.443a1 1 0 0 1 -.356 -.917a3.95 3.95 0 0 1 .654 -1.613a3.6 3.6 0 0 1 1.71 -1.368c.38 -.146 .758 -.223 1.13 -.24a9 9 0 0 1 -.445 -1.023a4.23 4.23 0 0 1 -2.233 -.348a4 4 0 0 1 -.916 -.587l-.207 -.191a4 4 0 0 1 -.724 -.977l-.105 -.216a4.45 4.45 0 0 1 -.265 -2.806a1 1 0 0 1 .69 -.712q .119 -.036 .345 -.076c.801 -.135 1.678 -.082 2.53 .308q .283 .129 .545 .304q .048 -.235 .112 -.47a5 5 0 0 1 -.194 -.272c-.556 -.832 -.83 -1.806 -.642 -2.877l.05 -.242a3.75 3.75 0 0 1 1.027 -1.803l.169 -.159a4 4 0 0 1 1.303 -.796a1 1 0 0 1 .975 .178c.2 .168 .462 .446 .719 .83c.556 .833 .83 1.807 .642 2.878a3.77 3.77 0 0 1 -1.246 2.204c-.303 .27 -.607 .47 -.879 .61a7.5 7.5 0 0 0 -.255 1.971c0 3.502 2.285 6.272 5 6.272s5 -2.77 5 -6.276a7.6 7.6 0 0 0 -.253 -1.967a4.3 4.3 0 0 1 -.881 -.61a3.77 3.77 0 0 1 -1.246 -2.204c-.188 -1.07 .086 -2.045 .642 -2.877c.257 -.385 .52 -.663 .72 -.831a1 1 0 0 1 .974 -.178" />
+                    </svg>
+                  </span>
+                  <span class="text-sm text-white/85 group-hover:text-white transition-colors font-medium">第十七届中国好创意数字设计大赛</span>
+                </div>
+                <span class="text-xs text-white/40 mt-1 sm:mt-0 font-light tracking-wide group-hover:text-white/60 transition-colors">省赛二等奖 / 动画影片组</span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between py-3.5 border-t border-white/5 transition-all duration-300 hover:bg-white/[0.015] px-2 rounded-lg group">
+                <div class="flex items-center gap-3">
+                  <span class="inline-flex items-center justify-center w-8 h-8 flex-shrink-0 text-zinc-400 group-hover:text-zinc-200 transition-colors" title="获奖荣誉">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M16.956 2.057c.355 .124 .829 .375 1.303 .796a3.77 3.77 0 0 1 1.246 2.204c.173 .989 -.047 1.894 -.519 2.683l-.123 .194q -.097 .147 -.196 .272q .066 .234 .117 .471q .26 -.178 .545 -.307c.851 -.389 1.727 -.442 2.527 -.306q .226 .04 .346 .076a1 1 0 0 1 .689 .712l.029 .13q .015 .08 .03 .18a4.45 4.45 0 0 1 -.324 2.496a3.94 3.94 0 0 1 -1.71 1.85l-.242 .12a4.23 4.23 0 0 1 -2.234 .349a9 9 0 0 1 -.443 1.023c.37 .016 .748 .093 1.128 .24c.732 .28 1.299 .758 1.711 1.367a3.95 3.95 0 0 1 .654 1.613a1 1 0 0 1 -.356 .917a3.8 3.8 0 0 1 -.716 .443c-.933 .455 -1.978 .588 -3.043 .179l-.032 -.015l-.205 -.086a3.6 3.6 0 0 1 -1.33 -1.069l-.143 -.197a4 4 0 0 1 -.26 -.433a6 6 0 0 1 -.927 .511q .18 .262 .337 .56a7.4 7.4 0 0 1 .66 1.747a1 1 0 0 1 -1.95 .444l-.028 -.11a6 6 0 0 0 -.449 -1.143c-.342 -.645 -.71 -.968 -1.048 -.968s-.706 .323 -1.048 .969a5.6 5.6 0 0 0 -.367 .874l-.082 .269l-.028 .11a1 1 0 0 1 -1.95 -.444a7.3 7.3 0 0 1 .66 -1.747q .158 -.298 .337 -.561a6.4 6.4 0 0 1 -.93 -.508a4 4 0 0 1 -.256 .43c-.366 .541 -.855 .98 -1.473 1.267l-.238 .1c-.994 .382 -1.97 .292 -2.855 -.091l-.188 -.087a3.8 3.8 0 0 1 -.716 -.443a1 1 0 0 1 -.356 -.917a3.95 3.95 0 0 1 .654 -1.613a3.6 3.6 0 0 1 1.71 -1.368c.38 -.146 .758 -.223 1.13 -.24a9 9 0 0 1 -.445 -1.023a4.23 4.23 0 0 1 -2.233 -.348a4 4 0 0 1 -.916 -.587l-.207 -.191a4 4 0 0 1 -.724 -.977l-.105 -.216a4.45 4.45 0 0 1 -.265 -2.806a1 1 0 0 1 .69 -.712q .119 -.036 .345 -.076c.801 -.135 1.678 -.082 2.53 .308q .283 .129 .545 .304q .048 -.235 .112 -.47a5 5 0 0 1 -.194 -.272c-.556 -.832 -.83 -1.806 -.642 -2.877l.05 -.242a3.75 3.75 0 0 1 1.027 -1.803l.169 -.159a4 4 0 0 1 1.303 -.796a1 1 0 0 1 .975 .178c.2 .168 .462 .446 .719 .83c.556 .833 .83 1.807 .642 2.878a3.77 3.77 0 0 1 -1.246 2.204c-.303 .27 -.607 .47 -.879 .61a7.5 7.5 0 0 0 -.255 1.971c0 3.502 2.285 6.272 5 6.272s5 -2.77 5 -6.276a7.6 7.6 0 0 0 -.253 -1.967a4.3 4.3 0 0 1 -.881 -.61a3.77 3.77 0 0 1 -1.246 -2.204c-.188 -1.07 .086 -2.045 .642 -2.877c.257 -.385 .52 -.663 .72 -.831a1 1 0 0 1 .974 -.178" />
+                    </svg>
+                  </span>
+                  <span class="text-sm text-white/85 group-hover:text-white transition-colors font-medium">CMIT全国大学生数字媒体科技作品及创意竞赛</span>
+                </div>
+                <span class="text-xs text-white/40 mt-1 sm:mt-0 font-light tracking-wide group-hover:text-white/60 transition-colors">省赛二等奖 / 影视与动漫设计</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Cinematic Contact Section (THIRD LAYER: Contact CTA) -->
+      <section id="contact" class="mt-24 py-16 flex flex-col items-center text-center">
+        <span class="text-[10px] font-mono tracking-[0.25em] uppercase text-white/40 mb-3" id="contact-eyebrow">INITIATE COLLABORATION</span>
+        <h2 class="text-2xl md:text-3xl font-bold font-serif tracking-tight text-white mb-4" id="contact-title">开启下一段电影级视觉旅程</h2>
+        <p class="max-w-xl text-sm leading-relaxed text-white/60 mb-8" id="contact-desc">
+          欢迎国内影视动画公司/工作室、CG创意公司与独立艺术制片人接洽，可承担前期分镜、概念设计、人物设定、AI动画和高规格影视剧集。
+        </p>
+        
+        <!-- Contact Grid Buttons -->
+        <div class="flex items-center gap-6 mb-4">
+          <a id="email-btn" href="javascript:void(0)" onclick="return false;" class="px-8 py-3.5 bg-white text-black font-semibold text-xs tracking-wider rounded-full hover:bg-white/90 transition-all duration-300 flex items-center gap-2 cursor-default select-all" title="联系电话">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            电话：18064361183
+          </a>
+          <a id="github-btn" href="javascript:void(0)" onclick="return false;" class="px-8 py-3.5 bg-white/10 border border-white/10 text-white font-semibold text-xs tracking-wider rounded-full hover:bg-white/15 transition-all duration-300 flex items-center gap-2 cursor-default select-all" title="电子邮箱">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            E-mail：1796027859@qq.com
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- 7. Bottom Cinema Style Footer -->
+  <footer class="border-t border-white/5 bg-[#030303] py-12 px-16">
+    <div class="max-w-[1440px] mx-auto flex items-center justify-between text-white/40 text-xs">
+      <div class="flex items-center gap-4">
+        <span class="font-bold tracking-wider text-white">PORTFOLIO</span>
+        <span>&copy; 2026. All Rights Reserved.</span>
+      </div>
+      <div class="flex items-center gap-8 font-mono tracking-widest text-[10px]">
+        <span>IMMERSIVE 16:9 DESKTOP PLATFORM</span>
+        <span>DESIGNED BY ART DIRECTOR</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 9. Immersive Fullscreen Lightbox Modal -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center transition-all duration-300">
+    <!-- Close button -->
+    <button id="lightbox-close" class="absolute top-6 right-8 text-white/40 hover:text-white transition-colors focus:outline-none" aria-label="Close lightbox">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    
+    <!-- Prev button -->
+    <button id="lightbox-prev" class="absolute left-6 text-white/30 hover:text-white transition-colors focus:outline-none p-2 rounded-full hover:bg-white/5" aria-label="Previous image">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    
+    <!-- Next button -->
+    <button id="lightbox-next" class="absolute right-6 text-white/30 hover:text-white transition-colors focus:outline-none p-2 rounded-full hover:bg-white/5" aria-label="Next image">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    
+    <!-- Lightbox Content -->
+    <div class="max-w-[90vw] max-h-[85vh] flex flex-col items-center gap-4 relative">
+      <div id="lightbox-img-container" class="rounded-xl overflow-hidden shadow-2xl border border-white/5 max-h-[75vh]">
+        <img id="lightbox-img" src="" class="max-w-full max-h-[75vh] object-contain" alt="Fullscreen Lightbox Image">
+      </div>
+      <div class="flex flex-col items-center text-center max-w-[600px] px-4">
+        <span id="lightbox-index" class="text-[10px] font-mono tracking-widest text-white/40 uppercase">FRAME 01 / 04</span>
+        <h3 id="lightbox-title" class="text-white text-base font-medium tracking-wide mt-1">森林密语 / Forest Whisper</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Inject scripts -->
+  <script type="module" src="./data.js"></script>
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

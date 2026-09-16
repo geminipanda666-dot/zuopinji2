@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix 作品集备份",
+  "description": "An immersive, cinematic animation and CGI film portfolio designed with Apple TV+ and Netflix layouts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

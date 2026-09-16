@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#121212" />
+  
+  <!-- Subtle ambient background circle -->
+  <circle cx="150" cy="180" r="100" fill="url(#subtle-gradient)" opacity="0.15" />
+  
+  <!-- Stylized abstract portrait outline / camera aperture vector -->
+  <g stroke="#ffffff" stroke-width="1" fill="none" opacity="0.25">
+    <!-- Outer thin border -->
+    <rect x="15" y="15" width="270" height="370" rx="4" stroke-dasharray="4 4" />
+    
+    <!-- Stylized camera lens/aperture focusing on portrait -->
+    <circle cx="150" cy="170" r="65" />
+    <circle cx="150" cy="170" r="5" fill="#ffffff" opacity="0.3" />
+    
+    <!-- Abstract shoulder & head lines -->
+    <path d="M70,300 C70,250 110,230 150,230 C190,230 230,250 230,300" stroke-linecap="round" />
+    <circle cx="150" cy="155" r="35" />
+    
+    <!-- Technical focal markers -->
+    <path d="M150,90 L150,105" />
+    <path d="M150,235 L150,250" />
+    <path d="M80,170 L95,170" />
+    <path d="M205,170 L220,170" />
+  </g>
+  
+  <!-- Typographic Labels in JetBrains Mono / Inter style -->
+  <text x="150" y="325" fill="#ffffff" fill-opacity="0.4" font-family="'JetBrains Mono', monospace" font-size="10" letter-spacing="4" text-anchor="middle">PORTRAIT PLACEHOLDER</text>
+  <text x="150" y="342" fill="#ffffff" fill-opacity="0.2" font-family="'Inter', sans-serif" font-size="8" letter-spacing="2" text-anchor="middle">SUGGESTED RATIO 3:4 OR 4:5</text>
+  
+  <defs>
+    <radialGradient id="subtle-gradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+</svg>

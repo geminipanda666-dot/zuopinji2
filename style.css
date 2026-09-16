@@ -1,0 +1,402 @@
+@import "tailwindcss";
+
+/* 
+ * Animation & Film Portfolio Custom Styles
+ * Immersive UI Theme - Cinematic Experience
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Inter", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Base Body Styles for 16:9 Desktop Immersive Feel */
+html, body {
+  background-color: #050505;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Apple TV+ style vignette cover / Immersive UI Hero Gradients */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(5,5,5,0) 0%, rgba(5,5,5,0.32) 40%, rgba(5,5,5,0.68) 80%, rgba(5,5,5,0.8) 100%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.hero-left-mask {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(5,5,5,0.8) 0%, rgba(5,5,5,0.64) 20%, rgba(5,5,5,0) 60%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.hero-bottom-mask {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5,5,5,0.8) 0%, rgba(5,5,5,0) 30%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Glassmorphism Panel styles / glass classes from theme */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-nav {
+  background: rgba(5, 5, 5, 0.0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+}
+
+.glass-nav.scrolled {
+  background: rgba(5, 5, 5, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Hide scrollbars but keep functionality */
+.scrollbar-none, .hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar, .hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Safari/Chrome */
+}
+
+/* Horizontal slider list item layout */
+.horizontal-scroller {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 24px;
+  padding: 10px 4px 20px 4px;
+}
+
+/* Animated Transitions */
+.fade-transition {
+  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-slide {
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Project Cards Hover Style matching .card-hover */
+.project-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  cursor: pointer;
+  filter: brightness(0.85);
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.project-card.active-hero {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  filter: brightness(1.2);
+}
+
+/* Elegant Text Shadows for Cinematic Immersion */
+.cinematic-text-shadow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 4px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* Video Center Theater Panel (Slide in from Right to Center) */
+.video-panel {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  transform: translateX(100%);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  pointer-events: none;
+}
+
+.video-panel.open {
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.video-panel-inner {
+  position: relative;
+  width: 90vw;
+  max-width: 1180px;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 80px -15px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ambient Backdrop Filter during video play matching .detail-overlay */
+.video-overlay, .detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, backdrop-filter 0.5s ease;
+  z-index: 40;
+}
+
+.video-overlay.active, .detail-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Netflix Style Details Page Blur */
+.blur-content {
+  filter: blur(15px);
+  transition: filter 0.5s ease;
+}
+
+/* Custom indicator dot pulsing active state */
+.dot-indicator {
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+.dot-indicator.active {
+  width: 28px;
+  background-color: #ffffff;
+}
+
+/* Subtle page-load intro animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Horizontal Scroll Arrow Controls */
+.scroll-btn {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.scroll-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* Buttons matching the Immersive UI design */
+.btn-primary {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 99px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background: #eeeeee;
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 99px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.05);
+}
+
+/* --- Added Custom Styles for New Visual Sections --- */
+
+/* Navigation link with bottom slide-in line */
+.nav-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 4px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-item.active {
+  color: #ffffff !important;
+}
+.nav-item.active::after {
+  width: 100%;
+}
+
+/* White-sketch treatment for tonal and line sketch visual works */
+.white-sketch-container {
+  background-color: #141414 !important; /* Elegant dark charcoal card backing */
+  padding: 24px !important; /* Generous negative-space inner padding */
+  border: 1px solid rgba(255, 255, 255, 0.08) !important; /* 1px low-intensity border */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7) !important; /* Subtle ambient drop-shadow */
+}
+.white-sketch-container img {
+  object-fit: contain !important; /* Prevent cropping, show full sheet */
+  background-color: #ededed !important; /* Preserve elegant white/grey sketch paper colour */
+  border-radius: 4px !important;
+}
+
+/* Storyboard project button states */
+.storyboard-project-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  background-color: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: left;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.storyboard-project-btn:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.storyboard-project-btn.active {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
+}
+
+/* Filmstrip or thumb grid frames */
+.filmstrip-thumb {
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  background-color: #0d0d0d;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.5;
+}
+.filmstrip-thumb:hover {
+  opacity: 0.85;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.filmstrip-thumb.active {
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.02);
+}
+
+/* Custom sleek scrollbar for switcher */
+.switcher-scroll-track::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.switcher-scroll-track::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 9999px;
+}
+.switcher-scroll-track::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+}
+.switcher-scroll-track::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* --- Personal Profile Entrance Animations --- */
+.profile-fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profile-fade-in.animate-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+

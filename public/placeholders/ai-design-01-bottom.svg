@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1200" viewBox="0 0 600 1200">
+  <rect width="100%" height="100%" fill="#0a0a0a"/>
+  <rect x="30" y="30" width="540" height="1140" fill="none" stroke="#1c1c1c" stroke-width="2"/>
+  <!-- Grid layout and detailed technical info -->
+  <line x1="30" y1="200" x2="570" y2="200" stroke="#151515" stroke-width="1.5"/>
+  <rect x="60" y="250" width="140" height="140" rx="6" fill="#151515" stroke="#222222" stroke-width="1"/>
+  <rect x="230" y="250" width="140" height="140" rx="6" fill="#151515" stroke="#222222" stroke-width="1"/>
+  <rect x="400" y="250" width="140" height="140" rx="6" fill="#151515" stroke="#222222" stroke-width="1"/>
+  <text x="300" y="550" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#666666" text-anchor="middle" letter-spacing="4">E-COMMERCE DETAIL</text>
+  <text x="300" y="595" font-family="'Inter', sans-serif" font-size="28" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="8">PART 03 / ENDING</text>
+  <rect x="80" y="680" width="440" height="180" fill="#121212" stroke="#222222" stroke-width="1" rx="6"/>
+  <text x="110" y="720" font-family="monospace" font-size="11" fill="#888888" text-anchor="start">SYS_VERSION: 1.0.4</text>
+  <text x="110" y="750" font-family="monospace" font-size="11" fill="#888888" text-anchor="start">RENDERER: HYBRID PBR-AI ENGINE</text>
+  <text x="110" y="780" font-family="monospace" font-size="11" fill="#888888" text-anchor="start">CGI_GRID_COORDINATES: X-304 Y-1192</text>
+  <text x="110" y="810" font-family="monospace" font-size="11" fill="#888888" text-anchor="start">COLORWAY: SLATE MONOCHROME</text>
+  <circle cx="300" cy="1000" r="40" fill="none" stroke="#333333" stroke-width="2"/>
+  <path d="M 285,1000 L 315,1000 M 300,985 L 300,1015" stroke="#444444" stroke-width="1.5"/>
+</svg>

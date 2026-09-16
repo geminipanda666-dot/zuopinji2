@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" width="100%" height="100%">
+  <defs>
+    <!-- Filter to create rough, hand-carved, blocky stone edges -->
+    <filter id="chiseled-stone" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4.5" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    
+    <!-- Subtle drop shadow to pop against moving background images -->
+    <filter id="subtle-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.85" />
+    </filter>
+  </defs>
+
+  <g filter="url(#subtle-shadow)">
+    <!-- Main Big Chiseled Title "洛克王国" -->
+    <text x="400" y="145" 
+          fill="#FFFFFF" 
+          font-family="'Arial Black', 'Impact', 'SimHei', 'STHeiti', 'Microsoft YaHei', sans-serif" 
+          font-size="115" 
+          font-weight="900" 
+          letter-spacing="6" 
+          text-anchor="middle" 
+          filter="url(#chiseled-stone)">洛克王国</text>
+
+    <!-- Star decoration inside the '国' character -->
+    <!-- Positioned approximately at x=605, y=105 on the right side of the main text group -->
+    <path d="M 602 85 L 606 102 L 623 106 L 606 110 L 602 127 L 598 110 L 581 106 L 598 102 Z" 
+          fill="#050505" 
+          stroke="#FFFFFF" 
+          stroke-width="5.5" 
+          stroke-linejoin="round" />
+    <path d="M 602 85 L 606 102 L 623 106 L 606 110 L 602 127 L 598 110 L 581 106 L 598 102 Z" 
+          fill="#FFFFFF" />
+
+    <!-- Subtitle: ROCO KINGDOM: 世界 -->
+    <!-- Highly spaced and stylized clean monospace text matching the original reference -->
+    <text x="400" y="210" 
+          fill="#FFFFFF" 
+          font-family="'Impact', 'Arial Black', 'Inter', 'JetBrains Mono', sans-serif" 
+          font-size="21" 
+          font-weight="900" 
+          letter-spacing="15" 
+          text-anchor="middle" 
+          opacity="0.95">ROCO KINGDOM : 世界</text>
+  </g>
+</svg>
